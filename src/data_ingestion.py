@@ -10,6 +10,7 @@ log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
 
 
+
 # logging configuration
 logger = logging.getLogger('data_ingestion')
 logger.setLevel('DEBUG')
@@ -28,8 +29,8 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
-def load_params(params_path: str) -> dict:
-    """Load parameters from a YAML file."""
+"""def load_params(params_path: str) -> dict:
+    
     try:
         with open(params_path, 'r') as file:
             params = yaml.safe_load(file)
@@ -43,7 +44,7 @@ def load_params(params_path: str) -> dict:
         raise
     except Exception as e:
         logger.error('Unexpected error: %s', e)
-        raise
+        raise """
 
 def load_data(data_url: str) -> pd.DataFrame:
     """Load data from a CSV file."""
@@ -86,10 +87,10 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 
 def main():
     try:
-        params = load_params(params_path='params.yaml')
-        test_size = params['data_ingestion']['test_size']
-        # test_size = 0.2
-        data_path = 'https://raw.githubusercontent.com/vikashishere/Datasets/main/spam.csv'
+        ##params = load_params(params_path='params.yaml')
+        #test_size = params['data_ingestion']['test_size']
+        test_size = 0.2
+        data_path = 'Experiments\spam.csv'
         df = load_data(data_url=data_path)
         final_df = preprocess_data(df)
         train_data, test_data = train_test_split(final_df, test_size=test_size, random_state=2)
